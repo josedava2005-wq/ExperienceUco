@@ -1,22 +1,35 @@
 package com.example.demo.entidad;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import java.time.LocalDate;
+
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Table(
+    name = "inscripcion",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "evento_id"})
+)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Inscripcion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "evento_id", nullable = false)
     private Evento evento;
 
+    @Column(nullable = false)
+    private LocalDate fechaInscripcion;
+
+    @Column(nullable = false)
+    private String estado;
 }

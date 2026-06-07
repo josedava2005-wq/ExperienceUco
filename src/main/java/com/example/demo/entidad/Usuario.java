@@ -1,5 +1,6 @@
 package com.example.demo.entidad;
 
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,4 +29,7 @@ public class Usuario {
     @NotBlank(message = "El teléfono es obligatorio")
     @Column(nullable = false)
     private String telefono;
+    
+    @Column(nullable = true)
+    private LocalDate fechaNacimiento;
 }
